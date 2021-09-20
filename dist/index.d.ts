@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexStyle, LayoutChangeEvent, ShadowStyleIOS, StyleProp, TransformsStyle, AccessibilityProps } from 'react-native';
+import { AccessibilityProps, FlexStyle, LayoutChangeEvent, ShadowStyleIOS, StyleProp, TransformsStyle } from 'react-native';
 export declare type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
 declare const resizeMode: {
     readonly contain: "contain";
@@ -57,6 +57,7 @@ export interface FastImageProps extends AccessibilityProps {
     source: Source | number;
     resizeMode?: ResizeMode;
     fallback?: boolean;
+    resizeImageAndroid?: ResizeImageAndroid;
     onLoadStart?(): void;
     onProgress?(event: OnProgressEvent): void;
     onLoad?(event: OnLoadEvent): void;
@@ -98,6 +99,10 @@ export interface FastImageStaticProperties {
     clearMemoryCache: () => Promise<void>;
     clearDiskCache: () => Promise<void>;
 }
+export declare type ResizeImageAndroid = {
+    width: number;
+    height: number;
+};
 declare const FastImage: React.ComponentType<FastImageProps> & FastImageStaticProperties;
 export default FastImage;
 //# sourceMappingURL=index.d.ts.map

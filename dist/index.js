@@ -108,4 +108,4 @@ const FastImageView = requireNativeComponent('FastImageView', FastImage, {
   }
 });
 
-export default FastImage;
+export { FastImage as default };
