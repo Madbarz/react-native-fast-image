@@ -56,6 +56,8 @@ class FastImageViewManager extends SimpleViewManager<FastImageViewWithUrl> imple
 
     @ReactProp(name = "source")
     public void setSrc(FastImageViewWithUrl view, @Nullable ReadableMap source) {
+        view.source = source;
+
         if (source == null || !source.hasKey("uri") || isNullOrEmpty(source.getString("uri"))) {
             // Cancel existing requests.
             if (requestManager != null) {
@@ -126,9 +128,17 @@ class FastImageViewManager extends SimpleViewManager<FastImageViewWithUrl> imple
                     //    - data:image/png;base64
                     .load(imageSource.getSourceForLoad())
                     .apply(FastImageViewConverter.getOptions(context, imageSource, source))
+                    .apply(FastImageViewConverter.getImageResizeOptions(view.imageSizeOverride))
                     .listener(new FastImageRequestListener(key))
                     .into(view);
         }
+    }
+
+    @ReactProp(name = "resizeImageAndroid")
+    public void setImageResize(FastImageViewWithUrl view, ReadableMap imageSizeOverride) {
+        // Re-run Glide with width and height override values set.
+        view.imageSizeOverride = imageSizeOverride;
+        setSrc(view, view.source);
     }
 
     @ReactProp(name = "tintColor", customType = "Color")
