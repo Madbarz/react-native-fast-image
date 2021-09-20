@@ -1,16 +1,8 @@
 import React, { forwardRef, memo } from 'react'
 import {
-    View,
-    Image,
-    NativeModules,
-    requireNativeComponent,
-    StyleSheet,
-    FlexStyle,
-    LayoutChangeEvent,
-    ShadowStyleIOS,
-    StyleProp,
-    TransformsStyle,
-    AccessibilityProps,
+    AccessibilityProps, FlexStyle, Image, LayoutChangeEvent, NativeModules,
+    requireNativeComponent, ShadowStyleIOS,
+    StyleProp, StyleSheet, TransformsStyle, View
 } from 'react-native'
 
 const FastImageViewNativeModule = NativeModules.FastImageView
@@ -83,7 +75,7 @@ export interface FastImageProps extends AccessibilityProps {
     source: Source | number
     resizeMode?: ResizeMode
     fallback?: boolean
-
+    resizeImageAndroid?: ResizeImageAndroid
     onLoadStart?(): void
 
     onProgress?(event: OnProgressEvent): void
@@ -205,6 +197,11 @@ export interface FastImageStaticProperties {
     preload: (sources: Source[]) => void
     clearMemoryCache: () => Promise<void>
     clearDiskCache: () => Promise<void>
+}
+
+export type ResizeImageAndroid = {
+    width: number
+    height: number
 }
 
 const FastImage: React.ComponentType<FastImageProps> &
